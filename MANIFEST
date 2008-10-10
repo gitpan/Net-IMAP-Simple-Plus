@@ -1,0 +1,11 @@
+MANIFEST
+Changes
+README
+Makefile.PL
+Net-IMAP-Simple-1.17.tar.gz
+patch
+collected.patch
+put.patch
+select_bug.patch
+unseen.patch
+META.yml                                 Module meta-data (added by MakeMaker)

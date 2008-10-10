@@ -8,4 +8,6 @@ collected.patch
 put.patch
 select_bug.patch
 unseen.patch
+Plus.pm
+Plus.pod
 META.yml                                 Module meta-data (added by MakeMaker)

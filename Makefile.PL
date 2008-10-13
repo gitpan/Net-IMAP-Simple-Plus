@@ -18,19 +18,38 @@ die "problem extracting Net::IMAP::Simple" unless -d 'lib' and -d 't';
 
 print "\n\npatching ...\n\n";
 
-open IN, "collect1.patch" or die $!;
-open OUT, "|-", $^X, patch => '-p1' or die $!;
-print OUT $_ while <IN>;
-close IN; close OUT;
+if( !$ENV{SKIP_CL1} ) {
+    open IN, "collect1.patch" or die $!;
+    open OUT, "|-", $^X, patch => '-p1' or die $!;
+    print OUT $_ while <IN>;
+    close IN; close OUT;
+}
 
-open IN, "collect2.patch" or die $!;
-open OUT, "|-", $^X, patch => '-p1' or die $!;
-print OUT $_ while <IN>;
-close IN; close OUT;
+if( !$ENV{SKIP_CL2} ) {
+    open IN, "collect2.patch" or die $!;
+    open OUT, "|-", $^X, patch => '-p1' or die $!;
+    print OUT $_ while <IN>;
+    close IN; close OUT;
+}
+
+if( !$ENV{SKIP_COR} ) {
+    open IN, "corion.patch" or die $!;
+    open OUT, "|-", $^X, 'patch' or die $!;
+    print OUT $_ while <IN>;
+    close IN; close OUT;
+}
+
+if( !$ENV{SKIP_UHB} ) {
+    open IN, "useless-hash-bug.patch" or die $!;
+    open OUT, "|-", $^X, 'patch' or die $!;
+    print OUT $_ while <IN>;
+    close IN; close OUT;
+}
 
 print "\n\n";
 
-unlink $_ for glob("lib/Net/IMAP/Simple.pm.*");
+unlink $_ for glob("lib/Net/IMAP/Simple.pm.*"); # some patches add .orig
+unlink $_ for glob("lib/Net/IMAP/Simple.pm[A-Za-z]*"); # some add Orig
 
 WriteMakefile(
     NAME         => 'Net::IMAP::Simple::Plus',

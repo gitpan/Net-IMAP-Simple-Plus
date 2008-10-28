@@ -13,4 +13,5 @@ Plus.pm
 Plus.pod
 corion.patch
 useless-hash-bug.patch
+10-28-08.flags-bug.patch
 META.yml                                 Module meta-data (added by MakeMaker)
